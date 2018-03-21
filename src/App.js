@@ -2,34 +2,33 @@ import React from "react";
 
 import Beermood from "./components/Beermood";
 import Form from "./components/Form";
-import Beer from "./components/Beer";
 import Random from "./components/Random";
-
+import BeerName from "./components/BeerName";
 
 
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      nameBeer: undefined,
-      image: undefined,
-      shortDesc: undefined,
-      description: undefined,
-      abv: undefined,
-      ibu: undefined,
-      food: undefined,
-      foodSec: undefined,
-      foodThird: undefined,
-      error: undefined
+      beerList: [],
     }
   }
   getBeer = async (e) => {
     e.preventDefault();
-    const api_call = await fetch('https://api.punkapi.com/v2/beers?page=1&per_page=80');
+    const abv_gt = Number(e.target.elements.abv_gt.value)*3;
+    const abv_lt = Number(abv_gt + 4);
+    const ibu_gt = Number(e.target.elements.ibu_gt.value)*25;
+    const ibu_lt = Number(ibu_gt + 26);
+    const ebc_gt = Number(e.target.elements.ebc_gt.value)*25;
+    const ebc_lt = Number(ebc_gt + 26);
+    const beerNameValue = e.target.elements.beerName.value;
+    const api_call = await fetch(`https://api.punkapi.com/v2/beers?abv_gt=${abv_gt}&abv_lt=${abv_lt}&ibu_gt=${ibu_gt}&ibu_lt=${ibu_lt}&ebc_gt=${ebc_gt}&ebc_lt=${ebc_lt}`);
     const data = await api_call.json();
     console.log(data);
-
-
+    console.log(`abv: ${abv_gt} - ${abv_lt}, ibu: ${ibu_gt} - ${ibu_lt}, ebc: ${ebc_gt} - ${ebc_lt}`);
+    this.setState({
+      beerList: data,
+    })
   }
   getRandomBeer = async (e) => {
     e.preventDefault();
@@ -37,36 +36,44 @@ class App extends React.Component {
     const data = await api_call.json();
     console.log(data);
     this.setState({
-      nameBeer: data[0].name,
-      image: data[0].image_url,
-      shortDesc: data[0].tagline,
-      description: data[0].description,
-      abv: data[0].abv,
-      ibu: data[0].ibu,
-      food: data[0].food_pairing[0],
-      foodSec: data[0].food_pairing[1],
-      foodThird: data[0].food_pairing[2],
-      error: '',
+      beerList: data,
     })
   }
+
+  getBeerName = async (e) => {
+    e.preventDefault();
+    const beerNameValue = e.target.elements.beerName.value;
+    let beerName = '';
+    if (beerNameValue !== '') {
+      beerName = `&beer_name=${beerNameValue}`;
+    }
+    const api_call = await fetch(`https://api.punkapi.com/v2/beers?${beerName}`);
+    const data = await api_call.json();
+    console.log(data);
+    this.setState({
+      beerList: data,
+    })
+  }
+
   render(){
+    let list = this.state.beerList.map((el) => (
+      <div key={el.id}>
+        <h3>{el.name}</h3>
+        <h4>{el.tagline}</h4>
+        <img src={el.image_url} height="350" alt="beer_image"/>}
+        <p>{el.description}</p>
+        <p>ABV: {el.abv}</p>
+        <p>IBU: {el.ibu}</p>
+        <p>Drink it with food: {el.food_pairing[0]}, {el.food_pairing[1]}, {el.food_pairing[2]}</p>
+      </div>
+    ))
     return (
       <div>
         <Beermood />
         <Random getRandomBeer={this.getRandomBeer}/>
         <Form getBeer={this.getBeer}/>
-        <Beer
-          nameBeer={this.state.nameBeer}
-          image={this.state.image}
-          shortDesc={this.state.shortDesc}
-          description={this.state.description}
-          abv={this.state.abv}
-          ibu={this.state.ibu}
-          food={this.state.food}
-          foodSec={this.state.foodSec}
-          foodThird={this.state.foodThird}
-          error={this.state.error}
-        />
+      <BeerName getBeerName={this.getBeerName}/>
+        <div>{list}</div>
       </div>
     );
   }
