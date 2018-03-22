@@ -5,7 +5,7 @@ class Random extends React.Component {
   render(){
     return (
       <div onClick={this.props.getRandomBeer}>
-        <button>random beer</button>
+        <button className="btn">Random beer</button>
       </div>
     );
   }

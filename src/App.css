@@ -5,7 +5,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: rgb(42, 42, 42)
+  color: rgb(42, 42, 42);
+  font-weight: 300;
 }
 body{
   background: #DC2424;  /* fallback for old browsers */
@@ -28,17 +29,111 @@ body{
   background-color: rgba(255,255,255,0.7);
 
   margin: 5% 10%;
-  height: 80vh;
+  height: 85vh;
   border-radius: 10px;
   padding: 30px;
   overflow: auto;
 }
 .parameters{
-  width: 50%;
-  display: inline-block;
-  margin: 0 auto;
+  width: 30%;
   text-align: center;
+  position: fixed;
+  right: 185px;
 }
 .beers{
   width: 50%;
+}
+.title{
+  font-weight: 400;
+  font-size: 50px;
+  font-size: 40px;
+  line-height: 42px;
+}
+.btn{
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+hr{
+  background-color: #2a1e41;
+  margin: 20px auto;
+  width:320px;
+}
+h2{
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+input[name='beerName']{
+  width: 260px;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+.zippers{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.zipper{
+  width: 180px;
+}
+/*.zipper::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+.zipper:focus {
+    outline: none;
+}
+.zipper::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}*/
+.beerList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.beerList img{
+  margin: 10px auto;
+}
+.beerList h3{
+  font-weight: 700;
+  font-size: 30px;
+  text-align: center;
+}
+.beerList h4{
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+}
+.beerList p{
+  text-align: justify;
+}
+.beer-param{
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+  width: 100%;
+}
+.beer-param p{
+  font-weight: 700;
+}
+.beer-food{
+  font-size: 14px;
+}
+.beer-food span{
+  font-weight: 700;
 }

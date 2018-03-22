@@ -56,14 +56,19 @@ class App extends React.Component {
 
   render(){
     let list = this.state.beerList.map((el) => (
-      <div key={el.id}>
+      <div key={el.id} className="beerList">
+        <hr/>
         <h3>{el.name}</h3>
         <h4>{el.tagline}</h4>
-        <img src={el.image_url} height="350" alt="beer_image"/>}
+        <img src={el.image_url} height="300" alt="beer_image"/>
         <p>{el.description}</p>
-        <p>ABV: {el.abv}</p>
-        <p>IBU: {el.ibu}</p>
-        <p>Drink it with food: {el.food_pairing[0]}, {el.food_pairing[1]}, {el.food_pairing[2]}</p>
+      <div className="beer-param">
+          <p>ABV: {el.abv}</p>
+          <p>IBU: {el.ibu}</p>
+          <p>EBC: {el.ebc}</p>
+        </div>
+        <p className="beer-food"><span>Drink it with food: </span><br/>{el.food_pairing[0]}, {el.food_pairing[1]}, {el.food_pairing[2]}</p>
+      <hr/>
       </div>
     ))
     return (
@@ -72,8 +77,11 @@ class App extends React.Component {
           <div className="beers">{list}</div>
           <div className="parameters">
             <Beermood />
+            <hr/>
             <Random getRandomBeer={this.getRandomBeer}/>
+            <hr/>
             <Form getBeer={this.getBeer}/>
+            <hr/>
             <BeerName getBeerName={this.getBeerName}/>
           </div>
         </div>

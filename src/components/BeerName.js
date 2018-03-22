@@ -5,9 +5,9 @@ class BeerByName extends React.Component {
   render(){
     return (
       <form onSubmit={this.props.getBeerName}>
-        <h2>or search by beer-name:</h2>
+        <h2>or search by beer-name</h2>
         <input type='text' name='beerName' placeholder='Apa, Ipa...'/>
-        <button>Search!</button>
+        <button className="btn">Search!</button>
       </form>
     );
   }
