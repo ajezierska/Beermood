@@ -21,7 +21,6 @@ class App extends React.Component {
     const ibu_lt = Number(ibu_gt + 26);
     const ebc_gt = Number(e.target.elements.ebc_gt.value)*25;
     const ebc_lt = Number(ebc_gt + 26);
-    const beerNameValue = e.target.elements.beerName.value;
     const api_call = await fetch(`https://api.punkapi.com/v2/beers?abv_gt=${abv_gt}&abv_lt=${abv_lt}&ibu_gt=${ibu_gt}&ibu_lt=${ibu_lt}&ebc_gt=${ebc_gt}&ebc_lt=${ebc_lt}`);
     const data = await api_call.json();
     console.log(data);
@@ -68,12 +67,16 @@ class App extends React.Component {
       </div>
     ))
     return (
-      <div>
-        <Beermood />
-        <Random getRandomBeer={this.getRandomBeer}/>
-        <Form getBeer={this.getBeer}/>
-      <BeerName getBeerName={this.getBeerName}/>
-        <div>{list}</div>
+      <div className="container">
+        <div className="box">
+          <div className="beers">{list}</div>
+          <div className="parameters">
+            <Beermood />
+            <Random getRandomBeer={this.getRandomBeer}/>
+            <Form getBeer={this.getBeer}/>
+            <BeerName getBeerName={this.getBeerName}/>
+          </div>
+        </div>
       </div>
     );
   }
