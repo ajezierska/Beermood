@@ -62,12 +62,13 @@ class App extends React.Component {
         <h4>{el.tagline}</h4>
         <img src={el.image_url} height="300" alt="beer_image"/>
         <p>{el.description}</p>
-      <div className="beer-param">
-          <p>ABV: {el.abv}</p>
-          <p>IBU: {el.ibu}</p>
-          <p>EBC: {el.ebc}</p>
-        </div>
         <p className="beer-food"><span>Drink it with food: </span><br/>{el.food_pairing[0]}, {el.food_pairing[1]}, {el.food_pairing[2]}</p>
+        <p className="beer-param">
+          <span>ABV: {el.abv}</span>
+          <span>IBU: {el.ibu}</span>
+          <span>EBC: {el.ebc}</span>
+        </p>
+
       <hr/>
       </div>
     ))
