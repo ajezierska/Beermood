@@ -80,7 +80,7 @@ input[name='beerName']{
   margin-bottom: 10px;
 }
 .zipper{
-  width: 180px;
+  width: 150px;
 }
 /*.zipper::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -139,4 +139,24 @@ input[name='beerName']{
 }
 .beer-food span{
   font-weight: 700;
+}
+.param-container{
+  display: flex;
+  justify-content: flex-start;
+}
+.param-names{
+  text-align: left;
+}
+.icons{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin: 0 10px;
+}
+.icons svg{
+  margin: 5px 0;
+}
+.fa-beer.fa-lg{
+  margin-top: 1px;
 }
